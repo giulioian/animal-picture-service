@@ -12,24 +12,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class AnimalPicsApplicationTests {
 
-	    @LocalServerPort
-	        private int port;
+    @LocalServerPort
+    private int port;
 
-	        private final TestRestTemplate restTemplate = new TestRestTemplate();
+    private final TestRestTemplate restTemplate = new TestRestTemplate();
 
-		    @Test
-		        void contextLoads() {
-				    }
+    @Test
+    void contextLoads() {
+    }
 
-		        @Test
-			    void fetchPictures_EndToEnd_Success() {
-				            // Arrange
-					    //         String url = "http://localhost:" + port + "/api/pictures/cat?count=1";
-					    //
-					    //                 // Act
-					    //                         ResponseEntity<Void> response = restTemplate.postForEntity(url, null, Void.class);
-					    //
-					    //                                 // Assert
-					    //                                         assertEquals(HttpStatus.OK, response.getStatusCode());
-					    //                                             }
-					    //                                             }
+    @Test
+    void fetchPictures_EndToEnd_Success() {
+        // Arrange
+        String url = "http://localhost:" + port + "/api/pictures/cat?count=1";
+
+        // Act
+        ResponseEntity<Void> response = restTemplate.postForEntity(url, null, Void.class);
+
+        // Assert
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+}
