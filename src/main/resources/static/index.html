@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Animal Pictures</title>
+</head>
+<body>
+    <h1>Animal Picture Service</h1>
+    
+    <div>
+        <h2>Fetch New Pictures</h2>
+        <select id="animalType">
+            <option value="cat">Cat</option>
+            <option value="dog">Dog</option>
+            <option value="bear">Bear</option>
+        </select>
+        <input type="number" id="count" value="1" min="1">
+        <button onclick="fetchPictures()">Fetch</button>
+    </div>
+
+    <div>
+        <h2>Latest Picture</h2>
+        <select id="viewAnimalType">
+            <option value="cat">Cat</option>
+            <option value="dog">Dog</option>
+            <option value="bear">Bear</option>
+        </select>
+        <button onclick="viewLatestPicture()">View</button>
+        <div>
+            <img id="latestPicture" style="max-width: 500px; margin-top: 20px;">
+        </div>
+    </div>
+   <script>
+    function fetchPictures() {
+        const animalType = document.getElementById('animalType').value;
+        const count = document.getElementById('count').value;
+        
+        fetch('/api/pictures/' + animalType + '?count=' + count, {
+            method: 'POST'
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Pictures fetched successfully!');
+            } else {
+                alert('Error fetching pictures');
+            }
+        });
+    }
+
+    function viewLatestPicture() {
+        const animalType = document.getElementById('viewAnimalType').value;
+        const img = document.getElementById('latestPicture');
+        img.src = '/api/pictures/' + animalType + '/latest?t=' + new Date().getTime();
+    }
+ </script> 
+</body>
+</html>
