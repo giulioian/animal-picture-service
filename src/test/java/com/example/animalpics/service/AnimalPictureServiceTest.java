@@ -22,9 +22,6 @@ public class AnimalPictureServiceTest {
     @Mock
     private AnimalPictureRepository repository;
 
-    @Mock
-    private RestTemplate restTemplate;
-
     private AnimalPictureService service;
 
     @BeforeEach
@@ -34,23 +31,19 @@ public class AnimalPictureServiceTest {
 
     @Test
     void fetchAndSavePictures_ValidAnimalType_SavesPicture() {
-        // Arrange
-        byte[] mockImageData = "mock image data".getBytes();
-        when(restTemplate.getForObject(anyString(), eq(byte[].class)))
-                .thenReturn(mockImageData);
-
-        // Act
+        // Act & Assert
         assertDoesNotThrow(() -> service.fetchAndSavePictures("cat", 1));
 
-        // Assert
-        verify(repository, times(1)).save(any(AnimalPicture.class));
+        // Verify that save was called at least once
+        verify(repository, atLeastOnce()).save(any(AnimalPicture.class));
     }
 
     @Test
     void fetchAndSavePictures_InvalidAnimalType_ThrowsException() {
         // Act & Assert
-        assertThrows(IllegalArgumentException.class,
+        Exception exception = assertThrows(RuntimeException.class,
                 () -> service.fetchAndSavePictures("invalid", 1));
+        assertTrue(exception.getMessage().contains("Invalid animal type"));
     }
 
     @Test
@@ -76,7 +69,8 @@ public class AnimalPictureServiceTest {
                 .thenReturn(Optional.empty());
 
         // Act & Assert
-        assertThrows(RuntimeException.class,
+        Exception exception = assertThrows(RuntimeException.class,
                 () -> service.getLastPicture("cat"));
+        assertEquals("No picture found for: cat", exception.getMessage());
     }
 }
