@@ -133,9 +133,9 @@ curl -X GET "http://localhost:8080/api/pictures/dog/latest" --output dog.jpg
 ## Image Sources
 
 The service uses the following APIs to fetch images:
-- Cats: [https://loremflickr.com/cat](https://loremflickr.com/cat)
-- Dogs: [https://place.dog](https://place.dog)
-- Bears: [https://placebear.com](https://placebear.com)
+- Cats: [https://loremflickr.com/300/300/cat](https://loremflickr.com/300/300/cat)
+- Dogs: [https://place.dog/300/300](https://place.dog/300/300)
+- Bears: [https://placebear.com/300/300](https://placebear.com/300/300)
 
 ## Contributing
 
