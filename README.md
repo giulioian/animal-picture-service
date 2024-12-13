@@ -12,7 +12,7 @@ A Spring Boot application that fetches and stores animal pictures from various o
 
 ## Prerequisites
 
-- Java 17 or higher
+- Java 21 or higher
 - Maven 3.6 or higher
 - Git (optional)
 
