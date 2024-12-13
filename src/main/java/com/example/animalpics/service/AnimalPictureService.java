@@ -25,7 +25,7 @@ public class AnimalPictureService {
                 int height = 300 + random.nextInt(200);
                 
                 String url = switch (animalType.toLowerCase()) {
-                    case "cat" -> "https://cataas.com/cat/";
+                    case "cat" -> "https://loremflickr.com/300/300/cat";
                     case "dog" -> "https://place.dog/300/300";
                     case "bear" -> "https://placebear.com/300/300";
                     default -> throw new IllegalArgumentException("Invalid animal type");
