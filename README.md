@@ -34,6 +34,7 @@ A Spring Boot application that fetches and stores animal pictures from various o
 
 2. Build the project:
    ```bash
+   chmod +x mvnw
    ./mvnw clean package
    ```
 
