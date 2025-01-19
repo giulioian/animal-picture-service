@@ -8,8 +8,12 @@ import org.springframework.web.client.RestTemplate;
 import java.time.LocalDateTime;
 import java.util.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Service
 public class AnimalPictureService {
+    private static final Logger logger = LoggerFactory.getLogger(AnimalPictureService.class);	
     private final AnimalPictureRepository repository;
     private final RestTemplate restTemplate = new RestTemplate();
     private final Random random = new Random();
@@ -30,7 +34,7 @@ public class AnimalPictureService {
                     case "bear" -> "https://placebear.com/300/300";
                     default -> throw new IllegalArgumentException("Invalid animal type");
                 };
-
+                logger.info("Fetching image from URL: {}", url);
                 byte[] imageData = restTemplate.getForObject(url, byte[].class);
 
                 if (imageData != null && imageData.length > 0) {
@@ -41,6 +45,7 @@ public class AnimalPictureService {
                     repository.save(picture);
                 }
             } catch (Exception e) {
+		logger.error("Error fetching image: ", e);
                 throw new RuntimeException("Failed to fetch image: " + e.getMessage());
             }
         }
